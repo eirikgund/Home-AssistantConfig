@@ -1,0 +1,36 @@
+light.vaskerom_1878363:
+  friendly_name: Downlights Grovkjøkken
+  ihc_position: Downlights Vaskerom
+binary_sensor.utelys_2450522:
+  friendly_name: Skumringssensor for utelys
+light.utelys_2511451:
+  friendly_name: Utelys
+light.bod_2287963:
+  friendly_name: Downlights Bod
+light.gjestetoalett_1162587:
+  friendly_name: Downlights Gjestetoalett
+light.kokken_2094427:
+  friendly_name: Downlights under skap Kjøkken
+media_player.bad:
+  friendly_name: Sonos bad
+media_player.stue:
+  friendly_name: Sonos Stue
+binary_sensor.vaskerom_1821530:
+  friendly_name: Vaskerom bevegelsessensor
+binary_sensor.gjestetoalett_1103962:
+  friendly_name: Gjestetoalett bevegelsessensor
+switch.stue_2120795:
+  friendly_name: Stue bryter
+binary_sensor.bod_2231130:
+  friendly_name: Bod bevegelsessensor
+switch.bad_2_4804955:
+  friendly_name: Bad 2 bryter
+switch.bad_1_4802395:
+  friendly_name: Bad 1 bryter
+binary_sensor.alarm_4773210:
+  friendly_name: Lekkasje Detektor 2 v/Kaffemaskin
+binary_sensor.alarm_4772698:
+  friendly_name: Lekkasje Detektor v/Oppvaskemaskin
+binary_sensor.alarm_4767066:
+  friendly_name: Røkdetektor i Teknisk Rom, SOverom 2, Gang Underetasje og Soverom
+    1

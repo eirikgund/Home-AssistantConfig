@@ -1,0 +1,180 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 14 
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Oslo
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+#http:
+#  base_url: https://støle.com
+#  ssl_certificate: /home/smarthus/HAconfig/certificate.pem
+#  ssl_key: /home/smarthus/HAconfig/privkey.pem
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Set weather provider
+weather:
+  - platform: met
+
+########### Sensors #####################
+sensor:
+  # Weather prediction
+  - platform: yr
+    name: yr
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+      - windSpeed
+      - windDirection
+      - humidity
+      - fog
+      - cloudiness
+
+## Korrigering decimal temp stue og kjøkken
+  - platform: template
+    sensors:
+      fix1_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_stue_kjokken_2631188.state |round(2)}}'
+        friendly_name: "Temperatur stue og kjøkken"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp tv stue
+  - platform: template
+    sensors:
+      fix2_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_tv_stue_10275860.state |round(2)}}'
+        friendly_name: "Temperatur tv stue"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Soverom 1
+  - platform: template
+    sensors:
+      fix3_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_soverom_1_3796756.state |round(2)}}'
+        friendly_name: "Temperatur soverom 1"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Soverom 2
+  - platform: template
+    sensors:
+      fix4_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_soverom_2_4009492.state |round(2)}}'
+        friendly_name: "Temperatur soverom 2"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Grovkjøkken
+  - platform: template
+    sensors:
+      fix5_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_grovkjokken_entre_3371284.state |round(2)}}'
+        friendly_name: "Temperatur Grovkjøkken"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Gjestetoalett
+  - platform: template
+    sensors:
+      fix6_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_gjestetoalett_bod_3158548.state |round(2)}}'
+        friendly_name: "Temperatur Gjestetoalett"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Baderom 1
+  - platform: template
+    sensors:
+      fix7_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_baderom_1_4222228.state |round(2)}}'
+        friendly_name: "Temperatur Baderom 1"
+        unit_of_measurement: "°C"
+
+## Korrigering decimal temp Baderom 2
+  - platform: template
+    sensors:
+      fix8_sensor:
+        value_template:
+          '{{ states.sensor.varmestyring_baderom_2_4434964.state |round(2)}}'
+        friendly_name: "Temperatur Baderom 2"
+        unit_of_measurement: "°C"
+
+
+
+############## Text to speech ################
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# IHC
+ihc:
+ - url: http://192.168.0.110
+   username: !secret ihc_username
+   password: !secret ihc_passwd
+   info: true
+   auto_setup: true
+
+# Roomba
+vacuum:
+  - platform: roomba
+    host: 192.168.0.153
+    username: !secret roomba_username
+    password: !secret roomba_passwd
+
+## Ring
+#ring:
+#  username: !secret ring_username
+#  password: !secret ring_passwd
